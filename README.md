@@ -1,6 +1,7 @@
 # Last.FM Discord Rich Presence
 Initially made to show now playing track from Google Play Music, using [scroblr](http://scroblr.fm/).<br>
-You can [create your own app](https://discordapp.com/developers/applications/me) to use it for your needs.<br>
+You can [create your own app](https://discordapp.com/developers/applications/me) to use it for your needs.
+
 ![alt text](example.png "Using for Google Play Music")
 # How to use
 1. Download this repository.
