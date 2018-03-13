@@ -10,7 +10,7 @@ function getPresence(track){
         state: `👤 ${track.artist["#text"]}`,
         largeImageKey: settings.largeImageKey,
         smallImageKey: settings.smallImageKey,
-        largeImageText: settings.appName,
+        largeImageText: settings.username+" is streaming",
         smallImageText: `💿 ${track.album["#text"]}`,
         instance: false
     };

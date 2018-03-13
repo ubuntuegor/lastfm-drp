@@ -1,6 +1,6 @@
 {
   "name": "lastfm-drp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Shows your Last.FM now playing track in Discord Rich Presence",
   "main": "app.js",
   "scripts": {
