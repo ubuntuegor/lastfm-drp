@@ -4,6 +4,15 @@ const http = require('http'),
 
 var lastSongUrl = "0", childProc;
 
+function leadingZero(n){
+    return (n>9) ? ""+n : "0"+n;
+}
+
+function log(message){
+    var now = new Date();
+    console.log(leadingZero(now.getHours())+":"+leadingZero(now.getMinutes())+":"+leadingZero(now.getSeconds())+" - "+message);
+}
+
 function getPresence(track){
     return {
         details: `🎵 ${track.name}`,
@@ -20,8 +29,7 @@ function update(){
     http.get(settings.lastfmBase+"?method=user.getrecenttracks&user="+settings.username+"&api_key="+settings.lastfmKey+"&format=json&limit=1", (res) => {
         var { statusCode } = res;
         if (statusCode !== 200) {
-            console.error (`Request Failed.\nStatus Code: ${statusCode}`);
-            // consume response data to free up memory
+            log (`Request Failed.\nStatus Code: ${statusCode}`);
             res.resume();
             return;
         }
@@ -33,7 +41,7 @@ function update(){
             try {
                 var track = JSON.parse(response).recenttracks.track[0];
             } catch (e) {
-                console.error(e.message);
+                log(e.message);
             }
             if (track["@attr"]&&track["@attr"].nowplaying=="true"&&track.url!=lastSongUrl){
                 if (!childProc||childProc.killed) {
@@ -42,14 +50,14 @@ function update(){
                     });
                     childProc.on("message", function(m){
                         if (m=="started") childProc.send(getPresence(track));
-                        else console.log(m);
+                        else log(m);
                     });
                     childProc.on("exit", function(){
-                        console.log("Player stopped");
+                        log("Player stopped");
                     });
                 }
                 else childProc.send(getPresence(track));
-                console.log("Track updated: "+ track.artist["#text"]+" - "+track.name);
+                log("Track updated: "+ track.artist["#text"]+" - "+track.name);
                 lastSongUrl = track.url;
             }
             else if (childProc&&!childProc.killed&&lastSongUrl!="0"&&!track["@attr"]) {
@@ -58,8 +66,8 @@ function update(){
             }
         });
     }).on('error', (e) => {
-        console.error(`Got error: ${e.message}`);
+        log(`Got error: ${e.message}`);
     });
 }
 setInterval(update, settings.delay*1000);
-console.log("Started");
+log("Started");
