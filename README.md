@@ -12,6 +12,7 @@ GPM preset:
 ```
 <br>
 Deezer preset:
+
 ```
     "clientId": "435033457190633475",
     "smallImageKey": "play",
