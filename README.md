@@ -3,6 +3,21 @@ Initially made to show now playing track from Google Play Music, using [scroblr]
 You can [create your own app](https://discordapp.com/developers/applications/me) to use it for your needs.
 
 ![alt text](example.png "Using for Google Play Music")
+
+GPM preset:
+```
+    "clientId": "422710601538732033",
+    "smallImageKey": "play",
+    "largeImageKey": "gpm",
+```
+<br>
+Deezer preset:
+```
+    "clientId": "435033457190633475",
+    "smallImageKey": "play",
+    "largeImageKey": "deezer",
+```
+
 # How to use
 1. Download this repository.
 2. Install dependencies `npm install`.
